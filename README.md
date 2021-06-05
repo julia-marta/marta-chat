@@ -4,7 +4,6 @@
 
 Реалтайм реализован с помощью [Socket.IO](https://socket.io).
 
-В проекте использована библиотека [React Icons](https://react-icons.github.io/react-icons/).
 ___
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
