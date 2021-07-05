@@ -36,7 +36,9 @@ class API {
 
 const defaultAPI = new API(defaultURL, TIMEOUT);
 
-module.exports = {
+const apiFactory = {
   API,
   getAPI: () => defaultAPI
 };
+
+export default apiFactory;
