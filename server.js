@@ -1,12 +1,36 @@
 const express = require(`express`);
+// const {Router} = require(`express`);
 const path = require('path');
 const http = require(`http`);
 const {Server} = require(`socket.io`);
+const db = require('./models/index.js');
 
 const port = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
+
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  next();
+});
+
+app.post('/message', async (req, res) => {
+  const {user, message} = req.body;
+
+    const newMessage = await db.Message.create({user, message});
+    return res.status(200).json(newMessage);
+});
+
+app.get(`/messages`, async (req, res) => {
+
+  const messages = await db.Message.findAll();
+
+  return res.status(200).json(messages);
+});
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
@@ -16,13 +40,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+
 const io = new Server(server, {
     cors: {
       origin: '*'
     }
   });
-
-const Socket = {};
 
 io.on(`connection`, (socket) => {
     const {address: ip} = socket.handshake;
@@ -30,7 +53,6 @@ io.on(`connection`, (socket) => {
     io.send(io.of("/").sockets.size);
 
     socket.on(`name`, (clientName) => {
-      Socket[ip] = clientName;
       io.emit(`name`, clientName);
     });
 
@@ -45,10 +67,6 @@ io.on(`connection`, (socket) => {
     socket.on(`disconnect`, () => {
       console.log(`Client disconnected: ${ip}`);
       io.send(io.of("/").sockets.size);
-
-      if (Socket[ip]) {
-        io.emit(`leave`, Socket[ip]);
-      }
     });
 });
 

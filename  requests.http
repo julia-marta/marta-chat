@@ -1,0 +1,8 @@
+# Создание юзера
+POST http://localhost:5000/message
+Content-Type: application/json
+
+{
+  "user": "Julia",
+  "message": "one more test message"
+}
