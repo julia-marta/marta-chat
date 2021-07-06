@@ -1,6 +1,8 @@
 # Реалтайм веб-приложение #ChatWithMarta
 
-:pager: Чат-приложение реального времени с клиентом на React.js и сервером на Node.js + Express.js.
+:speech_balloon: Чат-приложение реального времени с клиентом на React.js и сервером на Node.js + Express.js.
+
+Подключена база данных на PostgreSQL + Sequelize ORM для сохранения сообщений.
 
 Реалтайм реализован с помощью [Socket.IO](https://socket.io).
 
