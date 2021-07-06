@@ -1,9 +1,8 @@
 const axios = require(`axios`);
 
-const TIMEOUT = 1000;
-const DEFAULT_URL = `http://localhost:5000`;
 
-const URL = process.env.API_URL || DEFAULT_URL;
+const TIMEOUT = 1000;
+const URL = `https://marta-chat.herokuapp.com`;
 
 class API {
 
