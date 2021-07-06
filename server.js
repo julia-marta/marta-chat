@@ -25,6 +25,14 @@ app.post('/message', async (req, res) => {
     return res.status(200).json(newMessage);
 });
 
+app.delete(`/messages/:id`, async (req, res) => {
+  const {id} = req.params;
+
+  await db.Message.destroy({where: {id}});
+
+  return res.status(200).send(`Message ${id} was deleted`);
+});
+
 app.get(`/messages`, async (req, res) => {
 
   const messages = await db.Message.findAll();

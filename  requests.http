@@ -1,8 +1,14 @@
-# Создание юзера
-POST https://marta-chat.herokuapp.com/message
+# Создание сообщения
+POST https://marta-chat.herokuapp.com/message HTTP/1.1
 Content-Type: application/json
 
 {
-  "user": "Julia",
-  "message": "Hello, World"
+  "user": "Cat",
+  "message": "Meow"
 }
+
+###
+
+# Удаление сообщения
+DELETE https://marta-chat.herokuapp.com/messages/12 HTTP/1.1
+
