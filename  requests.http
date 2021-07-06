@@ -1,8 +1,8 @@
 # Создание юзера
-POST http://localhost:5000/message
+POST https://marta-chat.herokuapp.com/message
 Content-Type: application/json
 
 {
   "user": "Julia",
-  "message": "one more test message"
+  "message": "Hello, World"
 }
